@@ -1,31 +1,32 @@
 package com.course.rabitmqproducer;
 
-import com.course.rabitmqproducer.producer.HelloRabbitProducer;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.course.rabitmqproducer.entity.Employee;
+import com.course.rabitmqproducer.producer.EmployeeJsonProducer;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.scheduling.annotation.EnableScheduling;
+
+import java.time.LocalDate;
 
 @SpringBootApplication
-public class HelloRabbitProducerMain implements CommandLineRunner {
+@Slf4j
+public class EmployeeJsonProducerMain implements CommandLineRunner {
 
-	//CommandLineRunner for HelloRabbitProducer, applcation ayaga kalktıgında queue'ya 1 tane mesaj yollanır.
+    @Autowired
+    private EmployeeJsonProducer employeeJsonProducer;
 
-	@Autowired
-	private HelloRabbitProducer helloRabbitProducer;
 
-	private Logger logger = LoggerFactory.getLogger(HelloRabbitProducerMain.class);
+    public static void main(String[] args) {
+        SpringApplication.run(EmployeeJsonProducerMain.class, args);
+    }
 
-	public static void main(String[] args) {
-		SpringApplication.run(HelloRabbitProducerMain.class, args);
-	}
-
-	@Override
-	public void run(String... args) throws Exception {
-		helloRabbitProducer.sendHello("Ali" + Math.random());
-		logger.debug("Sended message:Ali");
-	}
+    @Override
+    public void run(String... args) throws Exception {
+        for (int i = 0; i < 5; i++) {
+            Employee e = new Employee("emp " + i, "Employee " + i, LocalDate.now());
+            employeeJsonProducer.sendMessage(e);
+        }
+    }
 }
