@@ -1,7 +1,5 @@
 package com.rabbitmq.exchange.consumer.consumer;
 
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rabbitmq.exchange.consumer.entity.PictureModel;
 import org.slf4j.Logger;
@@ -12,16 +10,16 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 
 @Service
-public class PictureImageConsumerDirect {
+public class PictureLogConsumerTopic {
 
 	private ObjectMapper objectMapper = new ObjectMapper();
 	
-	private static final Logger log = LoggerFactory.getLogger(PictureImageConsumerDirect.class);
+	private static final Logger log = LoggerFactory.getLogger(PictureLogConsumerTopic.class);
 	
-	@RabbitListener(queues = "q.picture.image")
+	@RabbitListener(queues = "q.picture.log")
 	public void listen(String message) throws IOException {
 		PictureModel p = objectMapper.readValue(message, PictureModel.class);
-		log.debug("On image : {}", p.toString());
+		log.debug("On picture.log : {}", p);
 	}
 	
 }

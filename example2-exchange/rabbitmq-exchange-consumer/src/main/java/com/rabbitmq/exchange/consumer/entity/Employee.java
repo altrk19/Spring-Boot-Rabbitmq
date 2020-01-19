@@ -1,8 +1,8 @@
 package com.rabbitmq.exchange.consumer.entity;
 
-import com.course.rabitmqconsumer.json.CustomLocalDateDeserializer;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.rabbitmq.exchange.consumer.json.CustomLocalDateDeserializer;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

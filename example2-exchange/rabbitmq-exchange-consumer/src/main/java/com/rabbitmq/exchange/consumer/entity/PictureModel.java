@@ -1,4 +1,4 @@
-package com.rabbitmq.exchange.producer.entity;
+package com.rabbitmq.exchange.consumer.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

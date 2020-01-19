@@ -19,7 +19,7 @@ public class PictureFilterConsumerTopic {
 	@RabbitListener(queues = "q.picture.filter")
 	public void listen(String message) throws IOException {
 		PictureModel p = objectMapper.readValue(message, PictureModel.class);
-		log.debug("On picture.filter : {}", p.toString());
+		log.debug("On picture.filter : {}", p);
 	}
 	
 }
